@@ -4,7 +4,7 @@ import googlemaps
 import networkx as nx
 import matplotlib.pyplot as plt
 
-gmaps = googlemaps.Client(key='AIzaSyBO9ods-p3dyVwvdtqN1m_bsKpTC3cGUTo')
+gmaps = googlemaps.Client(key='Token')
 
 
 def obtener_sugerencias(direccion):
