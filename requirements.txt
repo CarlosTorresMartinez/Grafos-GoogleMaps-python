@@ -1,0 +1,5 @@
+googlemaps~=4.10.0
+networkx~=3.4.2
+matplotlib~=3.9.2
+beautifulsoup4~=4.12.3
+googletrans~=4.0.0rc1
