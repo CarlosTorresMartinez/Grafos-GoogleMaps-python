@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
 from PIL.Image import Resampling
 
-gmaps = googlemaps.Client(key='AIzaSyBO9ods-p3dyVwvdtqN1m_bsKpTC3cGUTo')
+gmaps = googlemaps.Client(key='Token')
 
 CONSTANTS = {
     "language": "es",
