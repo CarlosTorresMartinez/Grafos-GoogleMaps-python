@@ -1,4 +1,5 @@
 import tkinter.messagebox
+import webbrowser
 
 from GoogleMapsRepository import GoogleMapsRepository
 from RutasController import RutasController
@@ -101,20 +102,24 @@ class Aplicacion(tk.Tk):
         x_scroll.config(command=self.lista_rutas.xview)
         y_scroll.config(command=self.lista_rutas.yview)
 
+    def mostrar_mapa(self, G, etiquetas_nodos, ruta_mas_corta, pasos):
+        mapa_html = self.controller.generar_mapa(G, etiquetas_nodos, ruta_mas_corta, pasos)
+        webbrowser.open(mapa_html)
+
     def obtener_mostrar_rutas(self):
         origen = self.origen.get()
         destino = self.destino.get()
 
         if origen == destino:
-            tkinter.messagebox.showwarning(title='Ubicaciones repetidas',
-                                           message='Las ubicaciones escritas no pueden ser las mismas.')
+            messagebox.showwarning(title='Ubicaciones repetidas',
+                                   message='Las ubicaciones escritas no pueden ser las mismas.')
             return
 
         modo = self.valores_transporte.get(self.modo_transporte.get(), "walking")
         if origen and destino:
             try:
                 rutas = self.controller.obtener_rutas(origen, destino, modo)
-                G, nodos_iniciales, nodos_finales = self.controller.crear_grafo(rutas)
+                G, nodos_iniciales, nodos_finales, pasos_totales = self.controller.crear_grafo(rutas)
                 etiquetas_nodos = {nodo: self.controller.generar_etiqueta(i) for i, nodo in enumerate(G.nodes())}
                 nodo_inicial = nodos_iniciales[0]
                 nodo_final = nodos_finales[0]
@@ -122,11 +127,11 @@ class Aplicacion(tk.Tk):
                 todas_las_rutas = self.controller.calcular_todas_las_rutas(G, nodo_inicial, nodo_final, etiquetas_nodos)
                 self.actualizar_lista_rutas(todas_las_rutas)
 
-                _, _, ruta_mas_corta = self.controller.calcular_ruta_mas_corta(G, nodo_inicial, nodo_final,
-                                                                               etiquetas_nodos)
+                _, _, ruta_mas_corta = self.controller.calcular_ruta_mas_corta(G, nodo_inicial, nodo_final, etiquetas_nodos)
 
-                self.controller.visualizar_grafo(G, nodos_iniciales, nodos_finales, ruta_mas_corta)
-                self.mostrar_grafo()
+                # Generar y mostrar el mapa interactivo con los pasos
+                self.mostrar_mapa(G, etiquetas_nodos, ruta_mas_corta, pasos_totales)
+
             except Exception as e:
                 messagebox.showerror("Error", f"Ocurrió un error: {e}")
         else:
@@ -144,32 +149,6 @@ class Aplicacion(tk.Tk):
                                     f"{ruta}: {distancia / 1000:.1f} km" if distancia >= 1000 else f"{distancia} mts")
             if ruta_minima and ruta_minima[0] == ruta:
                 self.lista_rutas.itemconfig(i, bg="lightblue", fg="darkblue")
-
-    def mostrar_grafo(self):
-        if not self.grafo_ventana or not tk.Toplevel.winfo_exists(self.grafo_ventana):
-            self.grafo_ventana = Toplevel(self)
-            self.grafo_ventana.title("Visualización del Grafo")
-            self.grafo_ventana.geometry("1000x1000")
-            self.grafo_ventana.resizable(True, True)
-            self.grafo_ventana.label_img = None
-
-        try:
-            self.img_original = Image.open("grafos.png")
-            self.img_scaled = self.img_original.resize((1000, 1000), Image.Resampling.LANCZOS)
-            img_tk = ImageTk.PhotoImage(self.img_scaled)
-
-            if self.grafo_ventana.label_img:
-                self.grafo_ventana.label_img.destroy()
-
-            self.grafo_ventana.label_img = tk.Label(self.grafo_ventana, image=img_tk)
-            self.grafo_ventana.label_img.image = img_tk
-            self.grafo_ventana.label_img.place(x=self.offset_x, y=self.offset_y)
-
-            self.grafo_ventana.bind("<MouseWheel>", self.zoom_imagen)
-            self.grafo_ventana.bind("<ButtonPress-1>", self.iniciar_movimiento)
-            self.grafo_ventana.bind("<B1-Motion>", self.mover_imagen)
-        except Exception as e:
-            messagebox.showerror("Error", f"No se pudo cargar la imagen: {e}")
 
     def iniciar_movimiento(self, event):
         self.start_x = event.x
