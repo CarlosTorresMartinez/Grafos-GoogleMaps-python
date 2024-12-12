@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7cf398d0-7f31-400d-90cc-a71e81d0e42a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aplicacion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Aplicacion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RutasController.py" beforeDir="false" afterPath="$PROJECT_DIR$/RutasController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grafos.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,18 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "CarlosTorresMartinez"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;CarlosTorresMartinez&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/CarlosTorresMartinez/Grafos-GoogleMaps-python.git",
-    "accountId": "0733cf6d-ce71-494e-80e9-dc752b981c85"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/CarlosTorresMartinez/Grafos-GoogleMaps-python.git&quot;,
+    &quot;accountId&quot;: &quot;0733cf6d-ce71-494e-80e9-dc752b981c85&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -49,19 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Aplicacion.executor": "Run",
-    "Python.mapas.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/carlo/Downloads/Nodos Pyhton - Google Maps",
-    "settings.editor.selected.configurable": "promo.django"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Aplicacion.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mapas.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/carlo/Downloads/Nodos Pyhton - Google Maps&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;promo.django&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Aplicacion" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Nodos Pyhton - Google Maps" />
