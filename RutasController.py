@@ -43,10 +43,15 @@ class RutasController:
         return G, nodos_iniciales, nodos_finales, pasos_totales
 
     def generar_mapa(self, G, etiquetas_nodos, ruta_mas_corta, pasos, nombre_archivo="mapa.html"):
+        # Determina el centro inicial del mapa (primer nodo)
         primer_nodo = next(iter(G.nodes()))
         mapa = folium.Map(location=[primer_nodo[0], primer_nodo[1]], zoom_start=15)
 
         marcador_cluster = MarkerCluster().add_to(mapa)
+
+        # Identificar nodo de origen y destino
+        nodo_origen = (pasos[0]['start_location']['lat'], pasos[0]['start_location']['lng'])
+        nodo_destino = (pasos[-1]['end_location']['lat'], pasos[-1]['end_location']['lng'])
 
         # Agregar todos los nodos con sus etiquetas y distancias
         for nodo, etiqueta in etiquetas_nodos.items():
@@ -56,30 +61,42 @@ class RutasController:
             distancia = paso_info['distance']['text'] if paso_info else "N/A"
             duracion = paso_info['duration']['text'] if paso_info else "N/A"
 
+            # Configurar color del marcador
+            color = "green" if nodo == nodo_origen else "red" if nodo == nodo_destino else "blue"
+
             popup_content = f"""
-               <b>Nodo {etiqueta}</b><br>
-               Distancia: {distancia}<br>
-               Duración: {duracion}
-               """
+            <b>Nodo {etiqueta}</b><br>
+            Distancia: {distancia}<br>
+            Duración: {duracion}
+            """
             folium.Marker(
                 location=[nodo[0], nodo[1]],
                 popup=popup_content,
-                icon=folium.Icon(
-                    color="green" if etiqueta == "A" else "red" if etiqueta == list(etiquetas_nodos.values())[
-                        -1] else "blue")
+                icon=folium.Icon(color=color)
             ).add_to(marcador_cluster)
 
-        # Dibujar todas las aristas del grafo
+        # Dibujar todas las aristas del grafo con nombres
         for u, v, data in G.edges(data=True):
+            # Encontrar el paso asociado a esta arista
+            paso_info = next((p for p in pasos if (
+                    (p['start_location']['lat'], p['start_location']['lng']) == u and
+                    (p['end_location']['lat'], p['end_location']['lng']) == v
+            )), None)
+            instruccion = paso_info['html_instructions'].replace('<b>', '').replace('</b>', '') if paso_info else "N/A"
+
             color = "blue" if (u, v) in zip(ruta_mas_corta, ruta_mas_corta[1:]) or (v, u) in zip(ruta_mas_corta,
                                                                                                  ruta_mas_corta[
                                                                                                  1:]) else "gray"
+
             folium.PolyLine(
                 locations=[[u[0], u[1]], [v[0], v[1]]],
                 color=color,
                 weight=5,
-                opacity=0.8
+                opacity=0.8,
+                popup=f"{instruccion}"
             ).add_to(mapa)
+
+        # Guardar el mapa en un archivo HTML
         mapa.save(nombre_archivo)
         return nombre_archivo
 
