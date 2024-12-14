@@ -1,6 +1,5 @@
-import networkx as nx
-import matplotlib.pyplot as plt
 import folium
+import networkx as nx
 from folium.plugins import MarkerCluster
 
 

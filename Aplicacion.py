@@ -1,12 +1,11 @@
-import tkinter.messagebox
+import tkinter as tk
 import webbrowser
+from tkinter import ttk, messagebox, Listbox
+
+from PIL import Image, ImageTk
 
 from GoogleMapsRepository import GoogleMapsRepository
 from RutasController import RutasController
-
-import tkinter as tk
-from tkinter import ttk, messagebox, Listbox, Toplevel
-from PIL import Image, ImageTk
 
 
 class Aplicacion(tk.Tk):
@@ -107,7 +106,7 @@ class Aplicacion(tk.Tk):
         webbrowser.open(mapa_html)
 
     def obtener_mostrar_rutas(self):
-        origen = self.origen.get()
+        origen = self.origen. get()
         destino = self.destino.get()
 
         if origen == destino:
